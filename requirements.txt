@@ -2,3 +2,4 @@ Flask
 scikit-learn
 joblib
 pytest
+gunicorn
