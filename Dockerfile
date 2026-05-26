@@ -27,3 +27,6 @@ EXPOSE 6000
 
 # Start the app with gunicorn (4 workers, bind to 0.0.0.0:6000)
 CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:6000", "app:app"]
+
+## Start the app with Gunicorn managing 4 Uvicorn ASGI workers, bound to port 6000
+# CMD ["gunicorn", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:6000", "app:app"]
