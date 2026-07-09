@@ -39,17 +39,22 @@ metadata:
   name: intent-classifier
 spec:
   predictor:
-    model:
-      modelFormat:
-        name: sklearn
-      storageUri: "<downloadable location>"
-      resources:
-        requests:
-          cpu: "100m"
-          memory: "512Mi"
-        limits:
-          cpu: "1"
-          memory: "1Gi"
+    containers:
+      - name: kserve-container
+        image: kserve/sklearnserver:v0.11.0
+        args:
+          - "--model_dir=/mnt/models"
+          - "--model_name=intent-classifier"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "512Mi"
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+        env:
+          - name: STORAGE_URI
+            value: "<downloadable location>"
 EOF
 
 kubectl get inferenceservice intent-classifier -n intent
